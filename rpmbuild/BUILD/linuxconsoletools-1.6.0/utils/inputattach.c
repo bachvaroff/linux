@@ -809,12 +809,10 @@ static struct input_types input_types[] = {
 { "--hampshire",   "-ham",         "Hampshire touchscreen",
 	B9600, CS8,
 	SERIO_HAMPSHIRE,	0x00,   0x00,   0,  NULL },
-/*
 { "--mtouch",		"-mtouch",	"MicroTouch (3M) touchscreen",
 	B9600, CS8 | CRTSCTS,
 	SERIO_MICROTOUCH,	0x00,	0x00,	0,	NULL },
-*/
-{ "--mtouch",		"-mtouch",	"MicroTouch (3M) touchscreen",
+{ "--idealtouch",		"-idealtouch",	"IdealTouch touchscreen",
 	B9600, CS8 | CRTSCTS,
 	0x50,	0x00,	0x00,	0,	NULL },
 #ifdef SERIO_TSC40
