@@ -52,10 +52,8 @@ MODULE_LICENSE("GPL");
 #define MTOUCH_MIN_YC 0
 #define MTOUCH_MAX_YC 0x3fff
 
-#define WORD_ASSEMBLY01(byte1, byte2) \
-	(((byte2) << 7) | (byte1))
-#define WORD_ASSEMBLY00(byte1, byte2) \
-	((byte2) | ((byte1) << 7))
+#define XY_DEC0(byte1, byte2) (((byte2) << 7) | (byte1))
+#define XY_DEC1(byte1, byte2) ((byte2) | ((byte1) << 7))
 #define DATA (mtouch->data)
 
 /*
@@ -81,11 +79,11 @@ static void mtouch_process_format_tablet(struct mtouch *mtouch)
 		mtouch->right = !!(DATA[0] & 0x01);
 		
 		if (DATA[0] & 0x10) {
-			cur_x = WORD_ASSEMBLY01(DATA[1], DATA[2]);
-			cur_y = WORD_ASSEMBLY01(DATA[3], DATA[4]);
+			cur_x = XY_DEC0(DATA[1], DATA[2]);
+			cur_y = XY_DEC0(DATA[3], DATA[4]);
 		} else {
-			cur_x = WORD_ASSEMBLY00(DATA[1], DATA[2]);
-			cur_y = WORD_ASSEMBLY00(DATA[3], DATA[4]);
+			cur_x = XY_DEC1(DATA[1], DATA[2]);
+			cur_y = XY_DEC1(DATA[3], DATA[4]);
 		}
 		
 		cur_x &= MTOUCH_MAX_XC;
